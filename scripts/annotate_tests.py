@@ -18,5 +18,5 @@ if __name__ == "__main__":
             name = name if re.fullmatch(r"test_[a-z0-9_]+", name) else "test"
             kind = failure.get("type", "error")
             kind = kind if re.fullmatch(r"[A-Za-z_\\]+", kind) else "error"
-            locations = [line for line in lines if re.fullmatch(r"/app/[A-Za-z0-9_/.-]+\.php:\d+", line)]
+            locations = [line for line in lines if re.fullmatch(r"/app/(?:app|tests)/[A-Za-z0-9_/.-]+\.php:\d+", line)]
             print("::error::" + name + ": " + kind + "; " + "; ".join(locations))

@@ -12,6 +12,7 @@
     <source><include><directory>app</directory><directory>database/migrations</directory></include></source>
     <php>
         <env name="APP_ENV" value="testing" force="true"/>
+        <server name="APP_ENV" value="testing" force="true"/>
         <env name="APP_DEBUG" value="false" force="true"/>
         <env name="LOG_CHANNEL" value="null" force="true"/>
     </php>

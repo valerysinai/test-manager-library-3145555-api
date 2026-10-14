@@ -50,7 +50,7 @@ abstract class ApiCase extends TestCase
     {
         $headers=['HTTP_ACCEPT'=>'application/json','CONTENT_TYPE'=>'application/json'];
         if($token!==null) $headers['HTTP_AUTHORIZATION']='Bearer '.$token;
-        return $this->call($method,'/api/v1'.$uri,[],[],[],$headers,$body===null?'':json_encode($body,JSON_THROW_ON_ERROR));
+        return $this->call($method,'/api/v1'.$uri,[],[],[],$headers,$body===null?'':json_encode($body,JSON_THROW_ON_ERROR|JSON_PRESERVE_ZERO_FRACTION));
     }
     protected function login(string $username='initial-admin',?string $password=null): string
     {

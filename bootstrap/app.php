@@ -15,6 +15,7 @@ return Application::configure(basePath: dirname(__DIR__))
         apiPrefix: 'api/v1',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        $middleware->remove(\Illuminate\Http\Middleware\HandleCors::class);
         $middleware->prepend(ApiCors::class);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

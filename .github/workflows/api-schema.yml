@@ -76,6 +76,8 @@ jobs:
             -v "$PWD/tests/Fixtures/tls-proxy.conf:/etc/nginx/nginx.conf:ro" nginx:stable-alpine
           tls_port="$(docker port library-tls-proxy 443/tcp | cut -d: -f2)"
           python3 scripts/tls_smoke.py "$tls_port" "$RUNNER_TEMP/library-tls/certificate.pem"
+      - name: Reject invalid INSERT statements directly in PostgreSQL
+        run: docker exec -i library-schema-db psql -v ON_ERROR_STOP=1 -U postgres -d library_test < tests/Fixtures/check-inserts.sql
       - name: Remove isolated test resources
         if: always()
         run: |

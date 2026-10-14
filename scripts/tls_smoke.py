@@ -54,12 +54,23 @@ try:
     def chunk(kind, data):
         return struct.pack("!I", len(data)) + kind + data + struct.pack("!I", binascii.crc32(kind + data))
     png = b"\x89PNG\r\n\x1a\n" + chunk(b"IHDR", struct.pack("!IIBBBBB", 1, 1, 8, 2, 0, 0, 0))
-    png += chunk(b"IDAT", zlib.compress(b"\0\xff\0\0")) + chunk(b"IEND", b"")
+    png += chunk(b"IDAT", zlib.compress(b"\0\xff\0\0"))
+    padding_size = 2_000_000 - len(png) - 24
+    png += chunk(b"tEXt", b"padding\0" + b"x" * (padding_size - 8)) + chunk(b"IEND", b"")
+    assert len(png) == 2_000_000
     boundary = "fixture-" + binascii.hexlify(os.urandom(16)).decode()
     multipart = ("--" + boundary + '\r\nContent-Disposition: form-data; name="file"; filename="image.txt"'
         + "\r\nContent-Type: text/plain\r\n\r\n").encode() + png + ("\r\n--" + boundary + "--\r\n").encode()
     request("PUT", "/books/" + book["id"] + "/cover", body=multipart, token=token,
         content_type="multipart/form-data; boundary=" + boundary)
+    assert request("GET", "/books/" + book["id"] + "/cover", token=token) == png
+    stage = "multipart-size-and-content-rejection"
+    oversized = multipart.replace(png, png + b"x" * 1_000_000)
+    invalid = multipart.replace(png, b"not an image")
+    for rejected in (oversized, invalid):
+        result = request("PUT", "/books/" + book["id"] + "/cover", 422, rejected, token,
+            "multipart/form-data; boundary=" + boundary)
+        assert result["code"] == "VALIDATION_ERROR"
     assert request("GET", "/books/" + book["id"] + "/cover", token=token) == png
     stage = "loan-return-report"
     member = request("POST", "/members", 201, {"full_name": "Socket member", "document_number": "SOCKET-1"}, token)

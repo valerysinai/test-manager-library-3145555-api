@@ -30,6 +30,8 @@ final class DependencyInspectorTest extends TestCase
             ['<?php namespace App\Library\Domain; function f($name) { return new $name(); }'],
             ['<?php namespace App\Library\Domain; function f($callback) { return $callback(); }'],
             ['<?php namespace App\Library\Domain; function f(): \Illuminate\Contracts\Support\Arrayable {}'],
+            ['<?php namespace App\Library\Domain; function f() { return call_user_func("app"); }'],
+            ['<?php namespace App\Library\Domain; function f() { require "external.php"; }'],
         ];
     }
 
@@ -77,6 +79,8 @@ final class DependencyInspectorTest extends TestCase
             ['<?php $container->singleton("port", fn () => new \App\Library\Adapters\Outbound\Security\Hasher());'],
             ['<?php $container->make("adapter");'],
             ['<?php $name = "adapter"; new $name();'],
+            ['<?php app(\App\Library\Adapters\Outbound\Security\Hasher::class);'],
+            ['<?php use function app as locate; locate("adapter");'],
         ];
     }
 

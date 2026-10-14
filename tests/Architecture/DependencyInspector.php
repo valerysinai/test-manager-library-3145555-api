@@ -21,7 +21,18 @@ final class DependencyInspector
             if (isset($skip[$index])) {
                 continue;
             }
+            if (in_array($token[0], [T_INCLUDE, T_INCLUDE_ONCE, T_REQUIRE, T_REQUIRE_ONCE, T_EVAL], true)) {
+                $errors[] = 'dynamic source loading';
+            }
             $previous = $tokens[$index - 1] ?? [null, ''];
+            if (self::nameToken($token) && $next[1] === '('
+                && !in_array($previous[0], [T_NEW, T_FUNCTION, T_OBJECT_OPERATOR, T_NULLSAFE_OBJECT_OPERATOR, T_DOUBLE_COLON], true)) {
+                $function = self::resolve($token[1], $namespace, $imports['function'], 'function');
+                $segments = explode('\\', strtolower($function));
+                if (in_array(end($segments), ['app', 'resolve'], true)) {
+                    $errors[] = 'service locator outside composition';
+                }
+            }
             $next = $tokens[$index + 1] ?? [null, ''];
             if ($token[0] === T_VARIABLE && $next[1] === '('
                 && !in_array($previous[0], [T_OBJECT_OPERATOR, T_NULLSAFE_OBJECT_OPERATOR], true)) {
@@ -96,6 +107,10 @@ final class DependencyInspector
             return false;
         }
         if ($kind === 'function') {
+            if (in_array($lower, ['call_user_func', 'call_user_func_array', 'forward_static_call',
+                'forward_static_call_array', 'class_alias', 'spl_autoload_register'], true)) {
+                return false;
+            }
             return function_exists($name) && (new \ReflectionFunction($name))->isInternal();
         }
         if ($kind === 'const') {

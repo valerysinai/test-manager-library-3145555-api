@@ -256,3 +256,19 @@ y rechazan instanciación/bindings de adaptadores fuera del punto de composició
 API quality incorpora un control de patrones de secretos sobre archivos versionados,
 con pruebas sintéticas y resultados sin valores sensibles.
 Estos controles complementan las pruebas PHP y de PostgreSQL; no acreditan el sistema integrado.
+
+## T-08 · Casos de uso de libros
+
+La rama implementa creación, detalle, búsqueda, edición, baja lógica y carga/lectura/eliminación
+de portadas detrás de puertos de aplicación. El [plan previo](evidence/t-08-plan.md) documenta
+las decisiones antes del código y la [evidencia T-08](evidence/t-08.md) relaciona criterios y pruebas.
+
+Las mutaciones exigen un actor admin. La edición conserva el ISBN y ajusta existencias por delta;
+las búsquedas solo incluyen activos y conservan paginación y total. La baja utiliza Clock y
+rechaza préstamos abiertos. El puerto UnitOfWork expresa rollback y reintento completo acotado,
+sin exponer el testigo nativo de PostgreSQL al núcleo.
+
+Las portadas admiten JPEG/PNG por contenido y hasta 2.000.000 bytes, según la decisión decimal
+documentada. Para quitar/reemplazar se confirma primero la clave nula y después se borra el binario.
+El IO externo ocurre fuera de transacciones; los límites ante fallos están descritos en la evidencia.
+Las pruebas usan fakes. Persistencia, disco y rutas HTTP se incorporan en sus tareas posteriores.

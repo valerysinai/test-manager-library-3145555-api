@@ -242,3 +242,17 @@ del administrador desde entorno a T-17.
 
 La construcción Docker del objetivo `test` ejecuta también estas pruebas con fakes. Los escenarios,
 resultados y límites están en [evidence/t-07.md](evidence/t-07.md).
+
+## Correcciones de la revisión SDD
+
+La base documental integrada en docs `16cba02` da lugar al
+[plan previo de correcciones](evidence/sdd-corrections-plan.md), versionado antes del código.
+La [evidencia de correcciones](evidence/sdd-corrections.md) distingue lo corregido de la
+aceptación pendiente por HTTP, persistencia y seguridad real.
+
+DateRange rechaza entradas con bytes nulos como errores de validación del campo.
+Las pruebas de arquitectura resuelven imports y aliases, verifican dependencias del núcleo
+y rechazan instanciación/bindings de adaptadores fuera del punto de composición.
+API quality incorpora un control de patrones de secretos sobre archivos versionados,
+con pruebas sintéticas y resultados sin valores sensibles.
+Estos controles complementan las pruebas PHP y de PostgreSQL; no acreditan el sistema integrado.

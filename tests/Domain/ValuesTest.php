@@ -91,4 +91,22 @@ final class ValuesTest extends TestCase
     {
         return [['2026-02-30'], ['2026-2-01'], ['2026-10-14T12:00:00Z'], [''], [' 2026-10-14']];
     }
+
+    #[DataProvider('nullByteEndpoints')]
+    public function test_null_byte_dates_raise_a_field_validation_error_instead_of_a_native_error(string $from, string $to, string $field): void
+    {
+        try {
+            DateRange::fromDates($from, $to);
+            self::fail('Debió rechazar la fecha con byte nulo.');
+        } catch (ValidationError $error) {
+            self::assertSame($field, $error->field);
+        }
+    }
+
+    public static function nullByteEndpoints(): array
+    {
+        $invalid = '2026-10-14'.chr(0);
+
+        return [[$invalid, '2026-10-15', 'from'], ['2026-10-13', $invalid, 'to']];
+    }
 }

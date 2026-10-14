@@ -13,16 +13,15 @@ final class DomainBoundaryTest extends TestCase
         $directory = new \RecursiveDirectoryIterator(__DIR__.'/../../app/Library/Domain');
         foreach (new \RecursiveIteratorIterator($directory) as $file) {
             if ($file->isFile() && $file->getExtension() === 'php') {
-                self::assertSame([], self::externalNames(file_get_contents($file->getPathname())), $file->getPathname());
+                self::assertSame([], DependencyInspector::core(file_get_contents($file->getPathname()), ['App\\Library\\Domain']), $file->getPathname());
             }
         }
     }
 
     public function test_boundary_check_detects_unused_framework_and_application_imports(): void
     {
-        self::assertSame(['Illuminate\\Support\\Facades\\DB', 'App\\Library\\Application\\Ports\\Clock'],
-            self::externalNames('<?php use Illuminate\\Support\\Facades\\DB; use App\\Library\\Application\\Ports\\Clock;'));
-        self::assertSame([], self::externalNames('<?php use DateTimeImmutable; use App\\Library\\Domain\\Book;'));
+        self::assertNotEmpty(DependencyInspector::core('<?php use Illuminate\\Support\\Facades\\DB; use App\\Library\\Application\\Ports\\Clock;', ['App\\Library\\Domain']));
+        self::assertSame([], DependencyInspector::core('<?php use DateTimeImmutable; use App\\Library\\Domain\\Book;', ['App\\Library\\Domain']));
     }
 
     public function test_domain_runs_in_a_process_without_composer_or_laravel(): void
@@ -33,23 +32,29 @@ final class DomainBoundaryTest extends TestCase
         self::assertSame(['domain-ok'], $output);
     }
 
-    private static function externalNames(string $source): array
+    public function test_application_only_references_its_own_namespace_domain_and_native_php(): void
     {
-        $external = [];
-        foreach (token_get_all($source) as $token) {
-            if (!is_array($token) || !in_array($token[0], [T_NAME_QUALIFIED, T_NAME_FULLY_QUALIFIED, T_NAME_RELATIVE], true)) {
-                continue;
+        $allowed = ['App\\Library\\Domain', 'App\\Library\\Application'];
+        $directory = new \RecursiveDirectoryIterator(__DIR__.'/../../app/Library/Application');
+        foreach (new \RecursiveIteratorIterator($directory) as $file) {
+            if ($file->isFile() && $file->getExtension() === 'php') {
+                self::assertSame([], DependencyInspector::core(file_get_contents($file->getPathname()), $allowed), $file->getPathname());
             }
-            $name = ltrim($token[1], '\\');
-            if ($name === 'App\\Library\\Domain' || str_starts_with($name, 'App\\Library\\Domain\\')) {
-                continue;
-            }
-            if (class_exists($name, false) && (new \ReflectionClass($name))->isInternal()) {
-                continue;
-            }
-            $external[] = $name;
         }
+        self::assertNotEmpty(DependencyInspector::core('<?php use App\\Library\\Adapters\\Outbound\\Security\\Hasher; use Illuminate\\Support\\Facades\\Hash;', $allowed));
+    }
 
-        return $external;
+    public function test_production_adapter_construction_and_bindings_are_confined_to_the_composition_point(): void
+    {
+        $root = realpath(__DIR__.'/../..');
+        $composition = realpath($root.'/app/Providers/LibraryServiceProvider.php');
+        foreach (['app', 'bootstrap', 'routes'] as $directory) {
+            foreach (new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($root.'/'.$directory)) as $file) {
+                if ($file->isFile() && $file->getExtension() === 'php') {
+                    self::assertSame([], DependencyInspector::composition(file_get_contents($file->getPathname()),
+                        $file->getRealPath() === $composition), $file->getPathname());
+                }
+            }
+        }
     }
 }

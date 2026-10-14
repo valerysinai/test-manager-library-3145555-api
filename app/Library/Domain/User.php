@@ -19,7 +19,7 @@ final readonly class User
         public string $role,
     ) {
         $this->id = Guard::uuid($id);
-        $this->username = Guard::text('username', mb_strtolower(trim($username), 'UTF-8'), 120);
+        $this->username = self::normalizeUsername($username);
         if (!in_array($role, ['admin', 'librarian'], true)) {
             throw new ValidationError('role', 'El rol no es válido.');
         }
@@ -31,6 +31,11 @@ final readonly class User
     public function passwordHash(): string
     {
         return $this->passwordHash;
+    }
+
+    public static function normalizeUsername(string $username): string
+    {
+        return Guard::text('username', mb_strtolower(trim($username), 'UTF-8'), 120);
     }
 
     public function __debugInfo(): array

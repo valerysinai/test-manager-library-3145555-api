@@ -36,6 +36,9 @@ final readonly class DateRange
 
     private static function date(string $value, string $field): DateTimeImmutable
     {
+        if (preg_match('/\A[0-9]{4}-[0-9]{2}-[0-9]{2}\z/', $value) !== 1) {
+            throw new ValidationError($field, 'La fecha debe ser válida y usar el formato YYYY-MM-DD.');
+        }
         $date = DateTimeImmutable::createFromFormat('!Y-m-d', $value, new DateTimeZone('UTC'));
         if ($date === false || $date->format('Y-m-d') !== $value) {
             throw new ValidationError($field, 'La fecha debe ser válida y usar el formato YYYY-MM-DD.');

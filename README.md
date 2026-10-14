@@ -210,3 +210,49 @@ Es una comprobación inicial de aislamiento; T-19 todavía debe verificar todos 
 de arquitectura y el punto único de composición al incorporar los adaptadores.
 
 La evidencia y la correspondencia con las tareas están en [evidence/t-03-t-06.md](evidence/t-03-t-06.md).
+
+## Cuarto avance: T-07
+
+`LoginService` y `CreateLibrarianService` usan los puertos `UserRepository`, `PasswordHasher`,
+`TokenIssuer` y `Clock`. La aplicación conoce el dominio y sus propios puertos, sin importar
+Laravel, persistencia ni adaptadores de seguridad.
+
+El inicio de sesión normaliza el nombre de usuario y verifica la contraseña sin recortarla
+ni transformarla. Usuario inexistente y contraseña incorrecta producen el mismo error
+`InvalidCredentials`, sin emitir token. El puerto de hash recibe un hash nulo cuando no hay
+usuario; el adaptador real de T-14 deberá verificar contra un hash ficticio de coste equivalente.
+El fake verifica el recorrido del puerto; no acredita equivalencia de tiempos ni Argon2id.
+
+Una sesión válida solicita un token para el ID y rol del usuario, con instantes UTC tomados
+del reloj inyectado y exactamente 28.800 segundos de vigencia. El resultado tiene los campos
+`access_token`, `token_type`, `expires_in` y `role` del contrato; su vista de depuración oculta
+el token. El fake de emisión no es un JWT: firma HS256 y validación del token se implementan en T-14.
+
+El alta exige un actor administrador autenticado y permite únicamente `librarian` como rol
+solicitado. La autorización precede a la consulta del nombre. El nombre normalizado es único;
+se conserva `UsernameTaken` si el repositorio detecta un conflicto después de la comprobación
+previa. La contraseña obligatoria no vacía pasa al puerto de hash sin añadir reglas de complejidad.
+La respuesta de alta contiene únicamente `id`, `username` y `role`.
+
+El actor y el UUID del nuevo usuario proceden del servidor. En T-16, el adaptador HTTP deberá
+obtener el actor de la autenticación verificada, rechazar campos ajenos y traducir los errores
+a 401, 403, 409 o 422 según el contrato. Este avance no añade rutas, usuarios iniciales ni bindings
+de infraestructura. La persistencia real corresponde a T-12, la seguridad a T-14 y el bootstrap
+del administrador desde entorno a T-17.
+
+La construcción Docker del objetivo `test` ejecuta también estas pruebas con fakes. Los escenarios,
+resultados y límites están en [evidence/t-07.md](evidence/t-07.md).
+
+## Correcciones de la revisión SDD
+
+La base documental integrada en docs `16cba02` da lugar al
+[plan previo de correcciones](evidence/sdd-corrections-plan.md), versionado antes del código.
+La [evidencia de correcciones](evidence/sdd-corrections.md) distingue lo corregido de la
+aceptación pendiente por HTTP, persistencia y seguridad real.
+
+DateRange rechaza entradas con bytes nulos como errores de validación del campo.
+Las pruebas de arquitectura resuelven imports y aliases, verifican dependencias del núcleo
+y rechazan instanciación/bindings de adaptadores fuera del punto de composición.
+API quality incorpora un control de patrones de secretos sobre archivos versionados,
+con pruebas sintéticas y resultados sin valores sensibles.
+Estos controles complementan las pruebas PHP y de PostgreSQL; no acreditan el sistema integrado.

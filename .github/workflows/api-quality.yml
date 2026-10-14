@@ -1,0 +1,23 @@
+name: API quality
+
+on:
+  push:
+    branches: [main, 'feature/**']
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  secrets:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Prove secret patterns with temporary synthetic examples
+        run: python3 -m unittest discover -s scripts -p test_check_secrets.py
+      - name: Scan tracked files without printing secret values
+        run: python3 scripts/check_secrets.py

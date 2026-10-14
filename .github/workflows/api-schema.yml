@@ -37,9 +37,17 @@ jobs:
           exit 1
       - name: Verify migration and engine constraints
         run: |
+          mkdir -p "$RUNNER_TEMP/phpunit"
+          chmod 777 "$RUNNER_TEMP/phpunit"
+          set +e
           docker run --rm --network library-schema-ci \
+            -v "$RUNNER_TEMP/phpunit:/diagnostics" \
             -e DB_HOST=library-schema-db -e DB_DATABASE=library_test -e DB_USERNAME=postgres -e DB_PASSWORD \
-            manager-library-api:integration
+            manager-library-api:integration php vendor/bin/phpunit --configuration phpunit.integration.xml --log-junit /diagnostics/results.xml
+          result=$?
+          set -e
+          python3 scripts/annotate_tests.py "$RUNNER_TEMP/phpunit/results.xml"
+          exit "$result"
       - name: Inspect schema using the specification queries
         run: |
           docker run --rm --network library-schema-ci \

@@ -49,6 +49,28 @@ final class ProductionAdaptersTest extends TestCase
         $this->expectException(\RuntimeException::class);
         new ConfiguredClock('fixed','2026-10-14T12:00:00Z','production');
     }
+    public function test_signed_tokens_cannot_override_algorithm_role_claims_or_lifetime(): void
+    {
+        $clock=new FakeClock(new DateTimeImmutable('2026-10-14T12:00:00Z'));
+        $secret=bin2hex(random_bytes(32)); $jwt=new HmacJwt($secret,$clock);
+        $encode=static fn($value)=>rtrim(strtr(base64_encode(json_encode($value,JSON_THROW_ON_ERROR)),'+/','-_'),'=');
+        $header=['alg'=>'HS256','typ'=>'JWT'];
+        $payload=['sub'=>F::id(1),'role'=>'admin','iat'=>$clock->now()->getTimestamp(),'exp'=>$clock->now()->getTimestamp()+28800];
+        foreach([
+            [['alg'=>'none','typ'=>'JWT'],$payload],
+            [['alg'=>'HS512','typ'=>'JWT'],$payload],
+            [$header,array_replace($payload,['role'=>'reader'])],
+            [$header,$payload+['username'=>'unexpected']],
+            [$header,array_replace($payload,['exp'=>$payload['exp']+1])],
+            [$header,array_replace($payload,['iat'=>$payload['iat']+1,'exp'=>$payload['exp']+1])],
+            [$header,array_replace($payload,['sub'=>'invalid'])],
+        ] as [$h,$p]) {
+            $input=$encode($h).'.'.$encode($p);
+            $token=$input.'.'.rtrim(strtr(base64_encode(hash_hmac('sha256',$input,$secret,true)),'+/','-_'),'=');
+            try { $jwt->verify($token); self::fail('El verificador aceptó un contrato alterado.'); }
+            catch(Unauthenticated) { self::assertTrue(true); }
+        }
+    }
     public function test_real_png_storage_is_private_opaque_and_cannot_traverse_paths(): void
     {
         $directory=sys_get_temp_dir().'/library-cover-'.bin2hex(random_bytes(10));

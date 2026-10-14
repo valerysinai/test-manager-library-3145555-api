@@ -59,6 +59,8 @@ final class Inputs
                 [$fields,$files]=request_parse_body();
                 $request->request->replace($fields);
                 $request->files->replace($files);
+                // allFiles() caches converted files; use a fresh request after native PUT parsing.
+                $request=Request::createFromBase($request);
             } catch (\Throwable) { throw new ValidationError('file','El multipart no es válido.'); }
         }
         if (!str_starts_with(strtolower($request->header('Content-Type', '')), 'multipart/form-data')

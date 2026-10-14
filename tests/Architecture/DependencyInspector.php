@@ -25,14 +25,6 @@ final class DependencyInspector
                 $errors[] = 'dynamic source loading';
             }
             $previous = $tokens[$index - 1] ?? [null, ''];
-            if (self::nameToken($token) && $next[1] === '('
-                && !in_array($previous[0], [T_NEW, T_FUNCTION, T_OBJECT_OPERATOR, T_NULLSAFE_OBJECT_OPERATOR, T_DOUBLE_COLON], true)) {
-                $function = self::resolve($token[1], $namespace, $imports['function'], 'function');
-                $segments = explode('\\', strtolower($function));
-                if (in_array(end($segments), ['app', 'resolve'], true)) {
-                    $errors[] = 'service locator outside composition';
-                }
-            }
             $next = $tokens[$index + 1] ?? [null, ''];
             if ($token[0] === T_VARIABLE && $next[1] === '('
                 && !in_array($previous[0], [T_OBJECT_OPERATOR, T_NULLSAFE_OBJECT_OPERATOR], true)) {
@@ -89,6 +81,14 @@ final class DependencyInspector
                 }
             }
             $previous = $tokens[$index - 1] ?? [null, ''];
+            if (self::nameToken($token) && $next[1] === '('
+                && !in_array($previous[0], [T_NEW, T_FUNCTION, T_OBJECT_OPERATOR, T_NULLSAFE_OBJECT_OPERATOR, T_DOUBLE_COLON], true)) {
+                $function = self::resolve($token[1], $namespace, $imports['function'], 'function');
+                $segments = explode('\\', strtolower($function));
+                if (in_array(end($segments), ['app', 'resolve'], true)) {
+                    $errors[] = 'service locator outside composition';
+                }
+            }
             if ($token[0] === T_STRING && $next[1] === '('
                 && in_array(strtolower($token[1]), ['bind', 'bindif', 'singleton', 'singletonif',
                     'scoped', 'scopedif', 'instance', 'make', 'makewith', 'resolve'], true)

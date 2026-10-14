@@ -10,7 +10,7 @@ final readonly class ConfiguredClock implements Clock
     public function __construct(string $mode, ?string $fixedAt, string $profile)
     {
         if (!in_array($mode, ['system', 'fixed'], true)) { throw new \RuntimeException('Configuración de reloj inválida.'); }
-        $this->fixed = null;
+        $fixed = null;
         if ($mode === 'fixed') {
             if (!in_array($profile, ['testing', 'demo'], true) || $fixedAt === null
                 || preg_match('/\A\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,6})?(?:Z|\+00:00)\z/', $fixedAt) !== 1) {
@@ -21,8 +21,9 @@ final readonly class ConfiguredClock implements Clock
                 $errors = DateTimeImmutable::getLastErrors();
                 if ($errors !== false && ($errors['warning_count'] || $errors['error_count'])) { throw new \RuntimeException; }
             } catch (\Throwable) { throw new \RuntimeException('Instante fijo inválido.'); }
-            $this->fixed = $date->setTimezone(new DateTimeZone('UTC'));
+            $fixed = $date->setTimezone(new DateTimeZone('UTC'));
         }
+        $this->fixed = $fixed;
     }
     public function now(): DateTimeImmutable { return $this->fixed ?? new DateTimeImmutable('now', new DateTimeZone('UTC')); }
 }

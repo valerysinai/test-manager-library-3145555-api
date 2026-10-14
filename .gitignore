@@ -14,3 +14,4 @@
 /storage/framework/views/*
 !/storage/framework/views/.gitkeep
 /evidence/*.log
+__pycache__/

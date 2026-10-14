@@ -32,7 +32,7 @@ abstract class ApiCase extends TestCase
         try {
             if($this->migrated) {
                 $pdo=DB::connection()->getPdo(); if($pdo->inTransaction()) $pdo->rollBack();
-                self::assertSame(0,Artisan::call('migrate:rollback',['--force'=>true]));
+                self::assertSame(0,Artisan::call('migrate:rollback',['--force'=>true,'--step'=>2]));
             }
             if(isset($this->covers)&&is_dir($this->covers)) {
                 foreach(glob($this->covers.'/*') as $file) unlink($file);

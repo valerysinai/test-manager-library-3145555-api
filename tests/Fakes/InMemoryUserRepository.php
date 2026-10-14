@@ -14,6 +14,8 @@ final class InMemoryUserRepository implements UserRepository
     public array $users = [];
     public int $lookupCount = 0;
     public bool $conflictOnAdd = false;
+    public function findById(string $id): ?User { return $this->users[$id] ?? null; }
+    public function lockBootstrap(): void {}
 
     public function findByUsername(string $username): ?User
     {

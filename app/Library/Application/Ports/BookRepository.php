@@ -8,6 +8,8 @@ interface BookRepository
 {
     /** Filtro activo centralizado también en búsquedas e ISBN; histórico no usa este puerto. */
     public function findActive(string $id): ?Book;
+    /** @param list<string> $ids @return array<string,Book> Una lectura por lote. */
+    public function findActiveMany(array $ids): array;
     public function findActiveByIsbn(Isbn $isbn): ?Book;
     /** Traducir solo el índice ISBN activo a IsbnTaken, también ante carrera de inserción. */
     public function add(Book $book): void;

@@ -268,4 +268,34 @@ final class BooksTest extends TestCase
             self::assertCount(1, $this->covers->files);
         }
     }
+    public function test_cleanup_failure_is_explicit_and_keeps_the_original_conflict_as_cause(): void
+    {
+        $book = $this->create();
+        $this->catalog->failSaves = 2;
+        $this->covers->failDelete = true;
+        try { $this->upload()->execute($this->admin, $book->id, 'PNG:new'); self::fail('Debió informar limpieza fallida.'); }
+        catch (\RuntimeException $error) {
+            self::assertSame('Falló la limpieza de una portada sin asociar.', $error->getMessage());
+            self::assertInstanceOf(ConcurrentModification::class, $error->getPrevious());
+            self::assertNull($this->catalog->books[$book->id]->coverKey);
+            self::assertCount(1, $this->covers->files);
+        }
+    }
+    public function test_missing_binary_and_deleted_book_are_not_readable_as_covers(): void
+    {
+        $book = $this->create();
+        $this->catalog->books[$book->id] = $book->withCover('missing-key');
+        $get = new GetCoverService($this->catalog, $this->covers);
+        try { $get->execute($book->id); self::fail('Debió indicar binario ausente.'); }
+        catch (ResourceNotFound) { self::assertSame([], $this->covers->files); }
+        $this->deactivate()->execute($this->admin, $book->id);
+        $this->expectException(ResourceNotFound::class);
+        $get->execute($book->id);
+    }
+    public function test_invalid_category_filter_is_rejected_before_query(): void
+    {
+        $this->expectException(ValidationError::class);
+        try { (new SearchBooksService($this->catalog))->execute(categoryId: 'invalid'); }
+        finally { self::assertSame(0, $this->catalog->reads); }
+    }
 }

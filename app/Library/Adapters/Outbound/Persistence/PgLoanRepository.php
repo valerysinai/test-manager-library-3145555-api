@@ -62,6 +62,9 @@ final readonly class PgLoanRepository implements LoanRepository
         }
         $where = implode(' AND ', $parts);
         $total = (int) $this->session->one('SELECT count(*) AS total FROM library.loan l WHERE '.$where, $p)['total'];
+        if ($total === 0 || $query->page > intdiv($total - 1, $query->size) + 1) {
+            return new LoanPage([], $query->page, $query->size, $total);
+        }
         $rows = $this->session->all('SELECT l.* FROM library.loan l WHERE '.$where.' ORDER BY l.loaned_at DESC,l.id LIMIT :size OFFSET :offset',
             $p + ['size' => $query->size, 'offset' => ($query->page - 1) * $query->size]);
         return new LoanPage($this->hydrate($rows), $query->page, $query->size, $total);

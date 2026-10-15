@@ -25,6 +25,12 @@ final class PaginationBoundaryTest extends ApiCase
             ->assertOk()->assertExactJson(['items'=>[], 'page'=>2, 'size'=>1, 'total'=>1]);
         $this->api('GET', $path.'?page=1&size=1', null, $token)
             ->assertOk()->assertJsonPath('total', 1)->assertJsonCount(1, 'items');
+        $filter = $path === '/loans' ? 'status=closed' : 'q=no-matching-record';
+        $this->api('GET', $path.'?'.$filter.'&page='.PHP_INT_MAX.'&size=50', null, $token)
+            ->assertOk()->assertExactJson(['items'=>[], 'page'=>PHP_INT_MAX, 'size'=>50, 'total'=>0]);
+        foreach (['page=0', 'page=-1', 'page=1.5', 'page[]=1', 'size=51'] as $invalid) {
+            $this->error($this->api('GET', $path.'?'.$invalid, null, $token), 422, 'VALIDATION_ERROR');
+        }
     }
 
     #[DataProvider('collections')]

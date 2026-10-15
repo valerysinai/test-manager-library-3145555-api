@@ -76,6 +76,9 @@ final readonly class PgBookRepository implements BookRepository
         $p = ['q1' => PgSession::pattern($query), 'q2' => PgSession::pattern($query)];
         if ($categoryId !== null) { $where .= ' AND b.category_id=:category'; $p['category'] = $categoryId; }
         $total = (int) $this->session->one('SELECT count(*) AS total FROM library.book b WHERE '.$where, $p)['total'];
+        if ($total === 0 || $page > intdiv($total - 1, $size) + 1) {
+            return new BookPage([], $page, $size, $total);
+        }
         $rows = $this->session->all(self::SELECT.' WHERE '.$where.' ORDER BY b.title,b.id LIMIT :size OFFSET :offset',
             $p + ['size' => $size, 'offset' => ($page - 1) * $size]);
         return new BookPage(array_map(Rows::book(...), $rows), $page, $size, $total);

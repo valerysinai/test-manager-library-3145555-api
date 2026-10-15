@@ -34,6 +34,9 @@ final readonly class PgMemberRepository implements MemberRepository
         $where = "full_name ILIKE :q1 ESCAPE '!' OR document_number ILIKE :q2 ESCAPE '!'";
         $p = ['q1' => PgSession::pattern($query), 'q2' => PgSession::pattern($query)];
         $total = (int) $this->session->one('SELECT count(*) AS total FROM library.member WHERE '.$where, $p)['total'];
+        if ($total === 0 || $page > intdiv($total - 1, $size) + 1) {
+            return new MemberPage([], $page, $size, $total);
+        }
         $rows = $this->session->all('SELECT * FROM library.member WHERE '.$where.' ORDER BY full_name,id LIMIT :size OFFSET :offset',
             $p + ['size' => $size, 'offset' => ($page - 1) * $size]);
         return new MemberPage(array_map(Rows::member(...), $rows), $page, $size, $total);

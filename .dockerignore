@@ -8,3 +8,5 @@ node_modules
 storage/logs/*.log
 bootstrap/cache/*.php
 evidence
+.local
+__pycache__

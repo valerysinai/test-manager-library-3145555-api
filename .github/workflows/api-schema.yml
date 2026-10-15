@@ -37,17 +37,49 @@ jobs:
           exit 1
       - name: Verify migration and engine constraints
         run: |
+          mkdir -p "$RUNNER_TEMP/phpunit"
+          chmod 777 "$RUNNER_TEMP/phpunit"
+          set +e
           docker run --rm --network library-schema-ci \
+            -v "$RUNNER_TEMP/phpunit:/diagnostics" \
             -e DB_HOST=library-schema-db -e DB_DATABASE=library_test -e DB_USERNAME=postgres -e DB_PASSWORD \
-            manager-library-api:integration
+            manager-library-api:integration php vendor/bin/phpunit --configuration phpunit.integration.xml --log-junit /diagnostics/results.xml
+          result=$?
+          set -e
+          python3 scripts/annotate_tests.py "$RUNNER_TEMP/phpunit/results.xml"
+          exit "$result"
       - name: Inspect schema using the specification queries
         run: |
           docker run --rm --network library-schema-ci \
             -e DB_HOST=library-schema-db -e DB_DATABASE=library_test -e DB_USERNAME=postgres -e DB_PASSWORD \
             manager-library-api:integration php artisan migrate --force
           docker exec -i library-schema-db psql -v ON_ERROR_STOP=1 -U postgres -d library_test < tests/Fixtures/schema-inspection.sql
+      - name: Verify real socket and multipart PUT over trusted TLS
+        shell: bash
+        run: |
+          jwt_secret="$(openssl rand -hex 32)"
+          admin_password="$(openssl rand -hex 24)"
+          echo "::add-mask::$jwt_secret"
+          echo "::add-mask::$admin_password"
+          export JWT_SECRET="$jwt_secret" ADMIN_PASSWORD="$admin_password" ADMIN_USERNAME=socket-admin
+          mkdir -p "$RUNNER_TEMP/library-tls"
+          openssl req -x509 -newkey rsa:2048 -nodes -days 1 -subj '/CN=localhost' \
+            -addext 'subjectAltName=DNS:localhost' \
+            -keyout "$RUNNER_TEMP/library-tls/key.pem" -out "$RUNNER_TEMP/library-tls/certificate.pem" 2>/dev/null
+          docker run -d --name library-api-live --network library-schema-ci \
+            -e DB_HOST=library-schema-db -e DB_DATABASE=library_test -e DB_USERNAME=postgres -e DB_PASSWORD \
+            -e JWT_SECRET -e ADMIN_PASSWORD -e ADMIN_USERNAME -e APP_ENV=testing \
+            -e CLOCK_MODE=fixed -e CLOCK_FIXED_AT=2026-10-14T12:00:00Z \
+            manager-library-api:integration sh scripts/start-api.sh
+          docker run -d --name library-tls-proxy --network library-schema-ci -p 127.0.0.1::443 \
+            -v "$RUNNER_TEMP/library-tls:/tls:ro" \
+            -v "$PWD/tests/Fixtures/tls-proxy.conf:/etc/nginx/nginx.conf:ro" nginx:stable-alpine
+          tls_port="$(docker port library-tls-proxy 443/tcp | cut -d: -f2)"
+          python3 scripts/tls_smoke.py "$tls_port" "$RUNNER_TEMP/library-tls/certificate.pem"
+      - name: Reject invalid INSERT statements directly in PostgreSQL
+        run: docker exec -i library-schema-db psql -v ON_ERROR_STOP=1 -U postgres -d library_test < tests/Fixtures/check-inserts.sql
       - name: Remove isolated test resources
         if: always()
         run: |
-          docker rm -f -v library-schema-db || true
+          docker rm -f -v library-tls-proxy library-api-live library-schema-db || true
           docker network rm library-schema-ci || true

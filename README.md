@@ -49,7 +49,33 @@ No hay prórroga: suban avances parciales con commits pequeños durante la prueb
 | [`test-manager-library-3145555-infra`](https://github.com/code-sena/test-manager-library-3145555-infra) | Contenedores, red, volúmenes y motor de base de datos vacío |
 | [`test-manager-library-3145555-tool`](https://github.com/code-sena/test-manager-library-3145555-tool) | Utilidades: sembrador de datos de demostración |
 
+## Estado para revisión final
+
+La API completa está publicada en `feature/api-completion`, pendiente de integrar en `main`.
+La [revisión final](evidence/api-final-review.md) relaciona requisitos, corrección reproducida y
+resultados posteriores a la evidencia histórica. No equivale a un PR fusionado ni acredita
+automáticamente los otros repositorios. Conserva el producto y los nombres originales.
+
+Para reproducir las pruebas PHP y PostgreSQL en Docker, sin instalar PHP en el equipo:
+
+```sh
+python scripts/verify_local.py
+```
+
+En algunos equipos el ejecutable es `python3`. Requiere Docker con contenedores Linux y Python 3.
+Construye el runner de las dependencias fijadas, ejecuta núcleo e integración contra PostgreSQL 16
+en una red privada nueva y elimina solo el contenedor, volumen y red generados. No usa la base
+del despliegue ni publica puertos. Las credenciales aleatorias permanecen en memoria/entorno.
+Los reportes completos quedan privados en `.local/`, excluidos de Git y del contexto Docker;
+la salida pública contiene solo conteos, identificadores de pruebas y ubicaciones de código.
+`--pagination-only` permite ejecutar las seis regresiones de paginación. Cualquier fallo produce
+salida no exitosa. El recorrido por socket HTTPS y los INSERT por psql se ejecutan además en CI.
+
 ## Primer avance: T-01
+
+Los apartados por avance conservan su alcance histórico. El estado de la API completa y su
+arranque actual se describen en [T-09 a T-19](#t-09-a-t-19--api-completa); los pendientes
+indicados en avances anteriores no sustituyen esa evidencia posterior.
 
 Esta rama prepara el backend con PHP 8.4 y Laravel 13, siguiendo la
 [adaptación aprobada](https://github.com/valerysinai/test-manager-library-3145555-docs/blob/main/adaptacion-react-laravel.md).
@@ -77,7 +103,7 @@ Las instalaciones reproducen las versiones del lockfile sin resolverlas de nuevo
 ### Arrancar con un comando
 
 ```sh
-docker run --rm -p 127.0.0.1:8000:8000 manager-library-api:bootstrap
+docker run --rm -p 127.0.0.1:8000:8000 manager-library-api:bootstrap php artisan serve --host=0.0.0.0 --port=8000
 ```
 
 En otra terminal:
@@ -272,3 +298,67 @@ Las portadas admiten JPEG/PNG por contenido y hasta 2.000.000 bytes, según la d
 documentada. Para quitar/reemplazar se confirma primero la clave nula y después se borra el binario.
 El IO externo ocurre fuera de transacciones; los límites ante fallos están descritos en la evidencia.
 Las pruebas usan fakes. Persistencia, disco y rutas HTTP se incorporan en sus tareas posteriores.
+
+## T-09 a T-19 · API completa
+
+El [plan previo](evidence/api-completion-plan.md) precede a la implementación. Los servicios,
+adaptadores, rutas y escenarios comprobados se relacionan en la
+[evidencia de cierre](evidence/api-completion.md). Se mantienen las seis tablas singulares,
+el contrato `/api/v1`, los mensajes españoles y el alcance del producto.
+
+La API incorpora préstamos y devolución por línea, vencidos y reporte histórico, repositorios
+PostgreSQL, coordinación transaccional por socio y testigo `xmin`, Argon2id, JWT HS256 de ocho
+horas y portadas privadas. Las CHECK de T-18 se añaden en una segunda migración; no se altera
+la migración inicial ni se incorporan columnas de auditoría o estado derivado.
+
+### Configurar y arrancar
+
+Construir la imagen de ejecución:
+
+```sh
+docker build --target application -t manager-library-api:application .
+```
+
+Preparar un archivo local de entorno a partir de `.env.example`, excluido de Git. Configurar
+`DB_HOST`, `DB_PORT`, `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD`, `JWT_SECRET` (al menos 32 bytes
+aleatorios), `ADMIN_USERNAME`, `ADMIN_PASSWORD`, `CORS_ORIGIN` y `COVERS_DIR`. No escribir
+contraseñas ni tokens en comandos compartidos, historial, capturas o archivos versionados.
+La red, el motor PostgreSQL 16 vacío, el volumen de portadas y HTTPS corresponden a `infra`.
+
+Con la base vacía disponible, aplicar las migraciones **explícitamente** desde la API:
+
+```sh
+docker run --rm --network library --env-file .env manager-library-api:application php artisan migrate --force
+```
+
+`library` es el nombre de red del ejemplo y debe coincidir con el despliegue de infra. Después,
+arrancar en esa red, con un volumen persistente en el directorio privado de portadas:
+
+```sh
+docker run --rm --network library --env-file .env -v library-covers:/app/storage/app/private/covers manager-library-api:application
+```
+
+El comando predeterminado ejecuta `library:bootstrap-admin` y abre el servidor solo si el
+aprovisionamiento termina correctamente. No ejecuta DDL. El administrador se toma únicamente
+del entorno; repetir el arranque conserva su contraseña y no eleva un bibliotecario existente.
+Salud sigue siendo pública e independiente de base/secretos cuando se ejecuta directamente el
+servidor, como en la verificación histórica T-01.
+
+`CLOCK_MODE=system` es el modo de producción. `fixed` requiere perfil `demo` o `testing` y
+`CLOCK_FIXED_AT` UTC válido; autenticación y negocio comparten ese reloj. Las portadas admiten
+JPEG/PNG comprobados por contenido y hasta 2.000.000 bytes; su directorio queda fuera de `public`.
+Para credenciales y tokens, acceder a través de HTTPS con certificado confiable. El servidor
+interno no publica puerto al host en este ejemplo; su exposición la configura infra.
+
+### Verificación y límites
+
+`API bootstrap` ejecuta las pruebas de dominio, aplicación con fakes, arquitectura, adaptadores
+reales sin base y composición. `API schema` usa una base PostgreSQL 16 desechable y verifica el
+contrato HTTP, rollback, restricciones y solicitudes simultáneas con dos procesos independientes.
+También prueba el arranque real y multipart PUT detrás de un proxy TLS temporal con certificado
+confiado explícitamente, sin desactivar validación TLS. `API quality` revisa Composer y patrones
+de secretos; los diagnósticos públicos de fallos solo incluyen identificadores y ubicaciones.
+
+Estas verificaciones de API no acreditan Compose final, React, sembrador, sitio público ni el
+umbral de búsqueda sobre 5.000 libros. Esos entregables continúan en los otros repositorios.
+El horario original de entrega permanece vigente; la evidencia posterior no cambia ese corte.

@@ -25,7 +25,7 @@ jobs:
       - name: Verify container health without a database
         shell: bash
         run: |
-          docker run -d --name library-api-smoke -p 127.0.0.1:8000:8000 manager-library-api:bootstrap
+          docker run -d --name library-api-smoke -p 127.0.0.1:8000:8000 manager-library-api:bootstrap php artisan serve --host=0.0.0.0 --port=8000 --no-reload
           for attempt in $(seq 1 30); do
             if curl --fail --silent http://127.0.0.1:8000/api/v1/health > /tmp/library-health.json; then
               test "$(cat /tmp/library-health.json)" = '{"status":"ok"}'

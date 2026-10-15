@@ -20,7 +20,7 @@ ENV APP_ENV=production APP_DEBUG=false LOG_CHANNEL=stderr
 EXPOSE 8000
 HEALTHCHECK --interval=15s --timeout=3s --start-period=10s --retries=3 \
     CMD php -r 'exit(@file_get_contents("http://127.0.0.1:8000/api/v1/health") === "{\"status\":\"ok\"}" ? 0 : 1);'
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000", "--no-reload"]
+CMD ["sh", "scripts/start-api.sh"]
 
 FROM runtime AS test_dependencies
 RUN composer install --no-scripts --no-interaction --prefer-dist --no-progress \

@@ -15,3 +15,4 @@
 !/storage/framework/views/.gitkeep
 /evidence/*.log
 __pycache__/
+/.local/

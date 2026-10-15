@@ -33,7 +33,7 @@ final class SchemaMigrationTest extends TestCase
             $this->assertSame(0, DB::table('public.migrations')->count());
         }
 
-        $this->assertSame(0, Artisan::call('migrate', ['--force' => true]));
+        $this->assertSame(0, Artisan::call('migrate', ['--force' => true, '--path' => 'database/migrations/2026_10_14_000001_create_library_schema.php']));
         $this->migrated = true;
     }
 
@@ -41,7 +41,7 @@ final class SchemaMigrationTest extends TestCase
     {
         try {
             if ($this->migrated) {
-                $this->assertSame(0, Artisan::call('migrate:rollback', ['--force' => true]));
+                $this->assertSame(0, Artisan::call('migrate:rollback', ['--force' => true, '--path' => 'database/migrations/2026_10_14_000001_create_library_schema.php']));
             }
         } finally {
             parent::tearDown();
@@ -238,13 +238,13 @@ final class SchemaMigrationTest extends TestCase
 
     public function test_migration_is_repeatable_and_can_be_rolled_back_and_reapplied(): void
     {
-        $this->assertSame(0, Artisan::call('migrate', ['--force' => true]));
+        $this->assertSame(0, Artisan::call('migrate', ['--force' => true, '--path' => 'database/migrations/2026_10_14_000001_create_library_schema.php']));
         $this->assertSame(5, DB::table('library.category')->count());
         $this->assertSame(1, DB::table('public.migrations')->count());
-        $this->assertSame(0, Artisan::call('migrate:rollback', ['--force' => true]));
+        $this->assertSame(0, Artisan::call('migrate:rollback', ['--force' => true, '--path' => 'database/migrations/2026_10_14_000001_create_library_schema.php']));
         $this->migrated = false;
         $this->assertNull(DB::selectOne("SELECT to_regnamespace('library') AS name")->name);
-        $this->assertSame(0, Artisan::call('migrate', ['--force' => true]));
+        $this->assertSame(0, Artisan::call('migrate', ['--force' => true, '--path' => 'database/migrations/2026_10_14_000001_create_library_schema.php']));
         $this->migrated = true;
         $this->assertSame(5, DB::table('library.category')->count());
     }

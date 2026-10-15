@@ -4,5 +4,6 @@ namespace App\Library\Application\Ports;
 use App\Library\Domain\Category;
 interface CategoryRepository
 {
+    public function all(): array;
     public function find(string $id): ?Category;
 }

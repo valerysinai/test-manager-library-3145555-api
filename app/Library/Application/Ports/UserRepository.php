@@ -8,6 +8,8 @@ use App\Library\Domain\User;
 
 interface UserRepository
 {
+    public function findById(string $id): ?User;
+    public function lockBootstrap(): void;
     /** Recibe el nombre ya normalizado. */
     public function findByUsername(string $username): ?User;
 

@@ -27,6 +27,13 @@ final class InMemoryCatalog implements BookRepository, CategoryRepository
         $this->categories[$science->id] = $science;
     }
     public function find(string $id): ?Category { $this->reads++; return $this->categories[$id] ?? null; }
+    public function all(): array { return array_values($this->categories); }
+    public function findActiveMany(array $ids): array
+    {
+        $result = [];
+        foreach ($ids as $id) { $book = $this->findActive($id); if ($book !== null) { $result[$id] = $book; } }
+        return $result;
+    }
     public function findActive(string $id): ?Book
     {
         $this->reads++;

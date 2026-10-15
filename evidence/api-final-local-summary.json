@@ -1,0 +1,62 @@
+[
+  {
+    "revision": "e4412ee2b7496b3768470ae82afb7cad9cf58b16",
+    "summary": {
+      "complete": true,
+      "passed": false,
+      "suites": [
+        {
+          "name": "pagination",
+          "tests": 6,
+          "failures": 6,
+          "exit_code": 1
+        }
+      ],
+      "cleanup_completed": true
+    }
+  },
+  {
+    "revision": "6c19fd7ce524df584c86bcb35ef8b4e5d7e4f4a6",
+    "summary": {
+      "complete": true,
+      "passed": true,
+      "suites": [
+        {
+          "name": "core",
+          "tests": 172,
+          "failures": 0,
+          "exit_code": 0
+        },
+        {
+          "name": "integration",
+          "tests": 27,
+          "failures": 0,
+          "exit_code": 0
+        }
+      ],
+      "cleanup_completed": true
+    }
+  },
+  {
+    "revision": "68b41b073ae5bf6be3c5f7bc9d21e62ed701d658",
+    "summary": {
+      "complete": true,
+      "passed": true,
+      "suites": [
+        {
+          "name": "core",
+          "tests": 172,
+          "failures": 0,
+          "exit_code": 0
+        },
+        {
+          "name": "integration",
+          "tests": 28,
+          "failures": 0,
+          "exit_code": 0
+        }
+      ],
+      "cleanup_completed": true
+    }
+  }
+]

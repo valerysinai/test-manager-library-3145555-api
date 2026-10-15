@@ -65,6 +65,22 @@ final class ConcurrencyTest extends ApiCase
     {
         return ['method'=>'POST','uri'=>'/api/v1/loans','body'=>['member_id'=>$member,'items'=>[['book_id'=>$book]]]];
     }
+    public function test_concurrent_member_creation_preserves_document_uniqueness(): void
+    {
+        $admin=$this->login(); $tokens=$this->librarians($admin);
+        $tasks=[];
+        foreach (['Primer socio','Segundo socio'] as $name) {
+            $tasks[]=['method'=>'POST','uri'=>'/api/v1/members',
+                'body'=>['full_name'=>$name,'document_number'=>'CONCURRENT-DOC']];
+        }
+        $results=$this->pair($tasks,$tokens);
+        $statuses=array_column($results,'status'); sort($statuses);
+        self::assertSame([201,409],$statuses);
+        $conflicts=array_values(array_filter($results,static fn($result)=>$result['status']===409));
+        self::assertSame('DOCUMENT_TAKEN',$conflicts[0]['body']['code']);
+        self::assertSame(1,DB::table('library.member')->count());
+        self::assertSame(1,DB::table('library.member')->where('document_number','CONCURRENT-DOC')->count());
+    }
     public function test_two_librarians_competing_for_the_last_copy_produce_one_201_and_one_409(): void
     {
         $admin=$this->login(); $tokens=$this->librarians($admin);

@@ -1,0 +1,2806 @@
+{
+  "version": 1,
+  "started_at": "2026-10-15T02:34:10.826Z",
+  "metadata": {
+    "revisions": {
+      "api": "68b41b073ae5bf6be3c5f7bc9d21e62ed701d658",
+      "infra": "b4965732a7d53543da9570c67f4d4c0d700aa61a",
+      "tool": "e494a3a21a9fbb83f0c5f438e837a81c8984779f"
+    },
+    "server": {
+      "logical_cpus": 16,
+      "memory_bytes": 12096012288,
+      "engine_version": "29.6.2",
+      "os": "linux",
+      "location": "Docker Compose on the client host; API and PostgreSQL in isolated containers"
+    },
+    "client": {
+      "location": "Node.js client on the Compose host",
+      "platform": "win32",
+      "architecture": "x64",
+      "logical_cpus": 16,
+      "cpu_model": "AMD Ryzen AI 7 350 w/ Radeon 860M              ",
+      "memory_bytes": 24869781504,
+      "node": "v26.5.0"
+    }
+  },
+  "protocol": {
+    "books": 5000,
+    "categories": 5,
+    "warmups_per_query": 20,
+    "measurements_per_query": 100,
+    "threshold_ms": 300,
+    "comparison": "strictly-less-than",
+    "clock": "monotonic-send-through-complete-body",
+    "https_verified": true,
+    "response_cache": false
+  },
+  "queries": [
+    {
+      "name": "unfiltered",
+      "query": {
+        "page": 1,
+        "size": 20
+      },
+      "expected_total": 5000,
+      "warmups": [
+        {
+          "status": 200,
+          "elapsed_ms": 33.51219999999739,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 34.380300000018906,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 32.411900000006426,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 31.786900000006426,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 31.023700000019744,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 46.76999999998952,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 38.470200000010664,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 35.60099999999511,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 36.0963000000047,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 33.05819999999949,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 31.9600999999966,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 34.03870000000461,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 41.57709999999497,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 31.928799999994226,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 31.871000000013737,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 33.49439999999595,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 34.876000000018394,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 37.16740000000573,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 38.19450000001234,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 38.55859999998938,
+          "valid_response": true
+        }
+      ],
+      "samples": [
+        {
+          "status": 200,
+          "elapsed_ms": 44.4267000000109,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 39.65160000001197,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 36.742399999988265,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 40.57240000000456,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 33.568900000012945,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 35.460800000000745,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 35.3463000000047,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 33.56649999998626,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 31.207899999979418,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 33.349400000006426,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 32.32119999997667,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 33.372200000012526,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 33.90209999997751,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 32.31659999999101,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 31.20189999998547,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 31.81449999997858,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 33.41790000000037,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 33.139100000000326,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 39.8067999999912,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 39.622400000022026,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 34.631300000008196,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 45.85950000002049,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 42.785900000017136,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 37.86470000000554,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 37.251599999988684,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 37.9434000000183,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 36.48199999998906,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 33.40549999999348,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 38.2786999999953,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 36.23610000000917,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 39.026499999978114,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 38.771999999997206,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 39.46160000000964,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 39.42290000000503,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 34.50409999999101,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 40.54099999999744,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 42.922999999980675,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 38.9316000000108,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 38.141700000007404,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 42.74869999999646,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 35.330199999996694,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 37.37299999999232,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 32.30840000000899,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 31.44649999999092,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 32.142499999987194,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 31.672999999980675,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 34.33850000001257,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 44.96630000000005,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 42.10869999998249,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 35.178000000014435,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 37.00210000001243,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 34.425900000002,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 33.76110000000335,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 31.925400000007357,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 35.69860000000335,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 34.46679999999469,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 38.38529999999446,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 32.327000000019325,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 33.294900000008056,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 31.05920000001788,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 39.35460000002058,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 48.312000000005355,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 40.5002000000095,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 38.47159999998985,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 31.95360000000801,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 33.782500000001164,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 33.68529999998282,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 33.78760000001057,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 30.14120000001276,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 32.484900000010384,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 38.77150000000256,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 39.774399999994785,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 41.27729999998701,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 38.4205999999831,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 40.70339999999851,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 52.86590000000433,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 43.24710000000778,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 32.546999999991385,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 33.48540000000503,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 31.85899999999674,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 33.84399999998277,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 34.39559999998892,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 31.58420000001206,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 36.73009999998612,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 35.63709999999264,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 35.225399999995716,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 44.62129999999888,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 42.257900000025984,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 35.24689999999828,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 36.734700000000885,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 37.6418999999878,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 39.179999999993015,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 38.44680000000517,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 40.89590000000317,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 33.599600000015926,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 32.83160000000498,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 34.23989999998594,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 34.59839999998803,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 33.08830000000307,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 32.734900000010384,
+          "valid_response": true
+        }
+      ],
+      "statistics": {
+        "max_ms": 52.86590000000433,
+        "median_ms": 35.403550000002724,
+        "p95_ms": 44.4267000000109
+      }
+    },
+    {
+      "name": "title",
+      "query": {
+        "page": 1,
+        "size": 20,
+        "q": "Libro de prueba 000"
+      },
+      "expected_total": 99,
+      "warmups": [
+        {
+          "status": 200,
+          "elapsed_ms": 35.079799999977695,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 35.76350000000093,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 40.663200000009965,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 43.416499999992084,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 38.90890000000945,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 33.743799999996554,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 35.98159999999916,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 46.69159999999101,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 42.07519999999204,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 47.61539999998058,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 55.6473999999871,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 46.51219999999739,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 46.37210000000778,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 42.157700000010664,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 41.12270000000717,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 38.81580000001122,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 35.00390000001062,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 36.264500000019325,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 42.844000000011874,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 52.85519999999087,
+          "valid_response": true
+        }
+      ],
+      "samples": [
+        {
+          "status": 200,
+          "elapsed_ms": 50.22809999997844,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 48.15090000000782,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 37.7780999999959,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 38.72219999998924,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 35.475399999995716,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 34.37210000000778,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 38.36569999999483,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 35.56469999998808,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 37.207600000023376,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 37.790600000007544,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 35.91359999999986,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 33.84870000000228,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 41.92139999999199,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 50.20390000002226,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 42.142699999996694,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 35.9831000000122,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 44.421699999977136,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 42.72479999999632,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 46.67249999998603,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 50.61819999999716,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 43.61300000001211,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 41.79649999999674,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 45.0341999999946,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 34.44209999998566,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 35.17540000000736,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 33.34999999997672,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 34.22599999999511,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 39.22229999999399,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 34.06909999999334,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 40.86590000000433,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 40.4659999999858,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 49.205199999996694,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 46.10430000000633,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 46.60009999998147,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 38.83229999998002,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 42.68330000000424,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 38.64519999999902,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 38.70780000000377,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 36.43399999997928,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 47.09450000000652,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 42.74090000000433,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 45.04450000001816,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 34.59299999999348,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 37.19539999999688,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 36.345899999985704,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 38.93630000000121,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 34.4030999999959,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 38.21249999999418,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 34.809700000012526,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 34.60130000000936,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 41.62870000000112,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 53.751399999979185,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 42.14879999999539,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 50.00720000002184,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 53.343599999992875,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 48.88769999999204,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 49.09859999999753,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 47.99900000001071,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 51.188200000004144,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 47.76019999998971,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 51.14920000001439,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 37.55289999998058,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 36.82350000002771,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 34.79329999999027,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 47.4943000000203,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 46.56089999998221,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 36.32119999997667,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 32.44430000000284,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 34.21099999998114,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 34.19309999997495,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 33.63210000001709,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 41.921999999991385,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 37.45809999998892,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 33.80669999998645,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 37.771300000022165,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 41.72339999998803,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 38.531300000002375,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 37.648400000005495,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 39.3692999999912,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 35.45110000000568,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 33.331099999981234,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 37.108199999987846,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 46.06129999997211,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 45.92389999999432,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 45.17519999999786,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 42.438099999999395,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 38.976800000004005,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 39.320999999996275,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 45.21540000001551,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 48.77530000000843,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 40.0340000000142,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 52.43189999999595,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 69.05540000001201,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 51.529999999998836,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 59.88490000000456,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 55.438200000004144,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 62.5228000000061,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 64.59030000001076,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 70.51130000001285,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 55.20240000000922,
+          "valid_response": true
+        }
+      ],
+      "statistics": {
+        "max_ms": 70.51130000001285,
+        "median_ms": 40.665949999995064,
+        "p95_ms": 55.438200000004144
+      }
+    },
+    {
+      "name": "author",
+      "query": {
+        "page": 1,
+        "size": 20,
+        "q": "Autor de prueba 07"
+      },
+      "expected_total": 100,
+      "warmups": [
+        {
+          "status": 200,
+          "elapsed_ms": 39.97299999999814,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 46.11309999998775,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 44.63979999997537,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 32.307399999990594,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 36.61960000000545,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 35.63490000000456,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 38.26170000000275,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 35.134399999980815,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 42.353100000007544,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 48.78120000002673,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 45.5107999999891,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 46.508499999996275,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 37.64650000000256,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 39.649600000004284,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 37.384299999976065,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 41.43739999999525,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 36.9146999999939,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 34.66370000000461,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 34.35480000000098,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 43.32610000000568,
+          "valid_response": true
+        }
+      ],
+      "samples": [
+        {
+          "status": 200,
+          "elapsed_ms": 51.312899999989895,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 40.8465000000142,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 43.36260000002221,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 38.41359999999986,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 35.06889999998384,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 38.67600000000675,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 35.87740000002668,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 36.8243000000075,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 40.41229999999632,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 41.73759999999311,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 44.92960000000312,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 43.01039999999921,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 42.25330000001122,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 39.66070000000764,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 37.424299999984214,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 37.27580000000307,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 40.938500000018394,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 32.37940000000526,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 37.435599999997066,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 35.48149999999441,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 45.22009999997681,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 45.82620000001043,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 41.26449999999022,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 36.50810000000638,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 40.66959999999381,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 37.83289999997942,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 37.86460000000079,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 51.23179999997956,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 38.64579999999842,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 42.39650000000256,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 48.38649999999325,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 41.93520000000717,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 38.02580000000307,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 50.62359999999171,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 44.461000000010245,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 37.27730000001611,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 36.50170000002254,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 36.260699999984354,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 34.61269999999786,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 36.26950000002398,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 34.889899999980116,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 33.59179999999469,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 39.32729999997537,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 39.228699999977835,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 41.53570000000764,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 47.982800000027055,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 32.36730000001262,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 33.428899999998976,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 35.06659999999101,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 37.204100000002654,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 40.25390000001062,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 44.86439999999129,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 37.453899999993155,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 34.963099999993574,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 36.50099999998929,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 40.3919000000169,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 39.73810000001686,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 33.081199999985984,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 34.891600000002654,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 37.000599999999395,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 37.224500000011176,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 37.54319999998552,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 38.68650000001071,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 33.924299999984214,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 39.13159999999334,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 33.90100000001257,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 33.92550000001211,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 41.45139999999083,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 37.41680000000633,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 38.63860000000568,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 40.93460000000778,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 41.20570000002044,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 36.859800000005635,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 37.55850000001374,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 36.74780000001192,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 40.50950000001467,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 42.927700000000186,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 39.467700000008335,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 37.85000000000582,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 39.29130000001169,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 43.79379999998491,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 43.171300000016345,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 38.90890000000945,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 41.992499999993015,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 47.78760000001057,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 35.625,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 35.26780000000144,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 37.58400000000256,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 41.21060000002035,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 36.01149999999325,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 44.83520000000135,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 34.97509999998147,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 35.118599999987055,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 38.25199999997858,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 34.97349999999278,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 37.25560000000405,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 38.15810000000056,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 37.76910000000498,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 38.67619999998715,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 39.741399999998976,
+          "valid_response": true
+        }
+      ],
+      "statistics": {
+        "max_ms": 51.312899999989895,
+        "median_ms": 38.33279999998922,
+        "p95_ms": 47.78760000001057
+      }
+    },
+    {
+      "name": "category-and-title",
+      "query": {
+        "page": 1,
+        "size": 20,
+        "category_id": "11111111-1111-4111-8111-111111111111",
+        "q": "Libro de prueba"
+      },
+      "expected_total": 1000,
+      "warmups": [
+        {
+          "status": 200,
+          "elapsed_ms": 28.15559999999823,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 26.21160000000964,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 25.823999999993248,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 25.18299999998999,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 30.708600000012666,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 27.91439999997965,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 25.27379999999539,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 27.14560000001802,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 29.245400000014342,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 34.73629999998957,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 29.2103000000061,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 28.233500000002095,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 28.406899999972666,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 30.535000000003492,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 32.08830000000307,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 26.25909999999567,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 27.67960000000312,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 25.184799999988172,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 26.52410000000964,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 26.90219999998226,
+          "valid_response": true
+        }
+      ],
+      "samples": [
+        {
+          "status": 200,
+          "elapsed_ms": 23.478100000007544,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 24.67620000001625,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 27.49059999999008,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 25.829500000021653,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 28.24519999997574,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 30.049399999988964,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 30.54690000001574,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 33.2440999999817,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 30.651600000011967,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 30.547200000000885,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 29.5173000000068,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 28.393000000010943,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 30.85879999998724,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 30.075400000001537,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 24.464500000001863,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 27.496300000027986,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 26.62270000000717,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 24.736100000009174,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 33.81710000001476,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 42.19229999999516,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 29.71099999998114,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 28.190499999996973,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 28.215200000006007,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 25.39999999999418,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 24.561200000025565,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 27.844300000026124,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 24.545799999992596,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 26.386900000012247,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 27.415299999993294,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 24.52270000000135,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 26.26929999998538,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 30.792599999986123,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 26.951399999990826,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 28.68609999999171,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 34.42430000001332,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 30.542399999976624,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 25.233700000011595,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 30.532600000005914,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 28.631700000027195,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 24.925099999993108,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 26.967399999994086,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 26.077000000019325,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 27.425499999983003,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 25.536299999977928,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 24.68880000000354,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 25.38839999999618,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 30.41370000000461,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 30.98499999998603,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 32.296000000002095,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 27.16439999997965,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 31.20900000000256,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 34.07490000000689,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 30.177599999995437,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 30.02629999999772,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 33.960399999981746,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 32.48180000000866,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 32.950500000006286,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 30.46469999998226,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 34.924099999974715,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 28.91589999999269,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 29.682900000014342,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 28.792499999981374,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 31.96259999999893,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 28.72650000001886,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 27.694399999978486,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 31.595900000014808,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 34.02369999999064,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 31.035399999993388,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 26.417000000015832,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 28.18660000001546,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 25.997300000017276,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 26.769599999999627,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 29.252999999996973,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 24.464100000011967,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 25.4826999999932,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 26.225700000009965,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 25.784899999998743,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 26.643900000024587,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 25.951299999986077,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 28.78200000000652,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 27.425199999997858,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 25.698000000003958,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 26.97159999998985,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 27.047400000010384,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 31.74859999999171,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 26.56489999999758,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 25.663000000000466,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 23.613299999997253,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 27.365200000000186,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 26.202900000003865,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 26.7274000000034,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 24.629899999999907,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 26.09979999999632,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 25.15649999998277,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 25.717299999989336,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 26.291499999992084,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 26.229699999996228,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 33.235599999985425,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 29.81020000000717,
+          "valid_response": true
+        },
+        {
+          "status": 200,
+          "elapsed_ms": 30.469899999996414,
+          "valid_response": true
+        }
+      ],
+      "statistics": {
+        "max_ms": 42.19229999999516,
+        "median_ms": 27.595350000003236,
+        "p95_ms": 33.960399999981746
+      }
+    }
+  ],
+  "diagnostic": {
+    "clients": 10,
+    "samples": [
+      {
+        "client": 1,
+        "query": "unfiltered",
+        "status": 200,
+        "elapsed_ms": 40.94450000001234,
+        "valid_response": true
+      },
+      {
+        "client": 6,
+        "query": "unfiltered",
+        "status": 200,
+        "elapsed_ms": 72.99330000000191,
+        "valid_response": true
+      },
+      {
+        "client": 4,
+        "query": "unfiltered",
+        "status": 200,
+        "elapsed_ms": 106.95079999999143,
+        "valid_response": true
+      },
+      {
+        "client": 5,
+        "query": "unfiltered",
+        "status": 200,
+        "elapsed_ms": 139.71549999999115,
+        "valid_response": true
+      },
+      {
+        "client": 2,
+        "query": "unfiltered",
+        "status": 200,
+        "elapsed_ms": 171.81650000001537,
+        "valid_response": true
+      },
+      {
+        "client": 7,
+        "query": "unfiltered",
+        "status": 200,
+        "elapsed_ms": 203.07809999998426,
+        "valid_response": true
+      },
+      {
+        "client": 3,
+        "query": "unfiltered",
+        "status": 200,
+        "elapsed_ms": 233.13610000000335,
+        "valid_response": true
+      },
+      {
+        "client": 8,
+        "query": "unfiltered",
+        "status": 200,
+        "elapsed_ms": 265.2331000000122,
+        "valid_response": true
+      },
+      {
+        "client": 10,
+        "query": "unfiltered",
+        "status": 200,
+        "elapsed_ms": 296.2908999999927,
+        "valid_response": true
+      },
+      {
+        "client": 9,
+        "query": "unfiltered",
+        "status": 200,
+        "elapsed_ms": 334.74460000000545,
+        "valid_response": true
+      },
+      {
+        "client": 1,
+        "query": "title",
+        "status": 200,
+        "elapsed_ms": 330.9977999999828,
+        "valid_response": true
+      },
+      {
+        "client": 6,
+        "query": "title",
+        "status": 200,
+        "elapsed_ms": 336.67639999999665,
+        "valid_response": true
+      },
+      {
+        "client": 4,
+        "query": "title",
+        "status": 200,
+        "elapsed_ms": 352.61369999998715,
+        "valid_response": true
+      },
+      {
+        "client": 5,
+        "query": "title",
+        "status": 200,
+        "elapsed_ms": 360.3608999999997,
+        "valid_response": true
+      },
+      {
+        "client": 2,
+        "query": "title",
+        "status": 200,
+        "elapsed_ms": 366.6125999999931,
+        "valid_response": true
+      },
+      {
+        "client": 7,
+        "query": "title",
+        "status": 200,
+        "elapsed_ms": 378.3945999999996,
+        "valid_response": true
+      },
+      {
+        "client": 3,
+        "query": "title",
+        "status": 200,
+        "elapsed_ms": 385.0228000000061,
+        "valid_response": true
+      },
+      {
+        "client": 8,
+        "query": "title",
+        "status": 200,
+        "elapsed_ms": 385.50599999999395,
+        "valid_response": true
+      },
+      {
+        "client": 10,
+        "query": "title",
+        "status": 200,
+        "elapsed_ms": 384.05239999998594,
+        "valid_response": true
+      },
+      {
+        "client": 9,
+        "query": "title",
+        "status": 200,
+        "elapsed_ms": 384.85939999998664,
+        "valid_response": true
+      },
+      {
+        "client": 1,
+        "query": "author",
+        "status": 200,
+        "elapsed_ms": 383.35090000001946,
+        "valid_response": true
+      },
+      {
+        "client": 6,
+        "query": "author",
+        "status": 200,
+        "elapsed_ms": 387.17109999997774,
+        "valid_response": true
+      },
+      {
+        "client": 4,
+        "query": "author",
+        "status": 200,
+        "elapsed_ms": 371.4513000000152,
+        "valid_response": true
+      },
+      {
+        "client": 5,
+        "query": "author",
+        "status": 200,
+        "elapsed_ms": 367.05629999999655,
+        "valid_response": true
+      },
+      {
+        "client": 2,
+        "query": "author",
+        "status": 200,
+        "elapsed_ms": 369.45819999999367,
+        "valid_response": true
+      },
+      {
+        "client": 7,
+        "query": "author",
+        "status": 200,
+        "elapsed_ms": 362.0081000000064,
+        "valid_response": true
+      },
+      {
+        "client": 3,
+        "query": "author",
+        "status": 200,
+        "elapsed_ms": 361.92819999999483,
+        "valid_response": true
+      },
+      {
+        "client": 8,
+        "query": "author",
+        "status": 200,
+        "elapsed_ms": 366.3576999999932,
+        "valid_response": true
+      },
+      {
+        "client": 10,
+        "query": "author",
+        "status": 200,
+        "elapsed_ms": 372.71159999998054,
+        "valid_response": true
+      },
+      {
+        "client": 9,
+        "query": "author",
+        "status": 200,
+        "elapsed_ms": 374.67579999999725,
+        "valid_response": true
+      },
+      {
+        "client": 1,
+        "query": "category-and-title",
+        "status": 200,
+        "elapsed_ms": 366.4511000000057,
+        "valid_response": true
+      },
+      {
+        "client": 6,
+        "query": "category-and-title",
+        "status": 200,
+        "elapsed_ms": 350.4990000000107,
+        "valid_response": true
+      },
+      {
+        "client": 4,
+        "query": "category-and-title",
+        "status": 200,
+        "elapsed_ms": 347.90380000000005,
+        "valid_response": true
+      },
+      {
+        "client": 5,
+        "query": "category-and-title",
+        "status": 200,
+        "elapsed_ms": 349.06100000001607,
+        "valid_response": true
+      },
+      {
+        "client": 2,
+        "query": "category-and-title",
+        "status": 200,
+        "elapsed_ms": 362.62449999997625,
+        "valid_response": true
+      },
+      {
+        "client": 7,
+        "query": "category-and-title",
+        "status": 200,
+        "elapsed_ms": 381.4985999999917,
+        "valid_response": true
+      },
+      {
+        "client": 3,
+        "query": "category-and-title",
+        "status": 200,
+        "elapsed_ms": 389.28609999999753,
+        "valid_response": true
+      },
+      {
+        "client": 8,
+        "query": "category-and-title",
+        "status": 200,
+        "elapsed_ms": 396.5938000000024,
+        "valid_response": true
+      },
+      {
+        "client": 10,
+        "query": "category-and-title",
+        "status": 200,
+        "elapsed_ms": 404.2881000000052,
+        "valid_response": true
+      },
+      {
+        "client": 9,
+        "query": "category-and-title",
+        "status": 200,
+        "elapsed_ms": 410.0234000000055,
+        "valid_response": true
+      }
+    ],
+    "http_valid": true
+  },
+  "complete": true,
+  "passed": true,
+  "statistics": {
+    "max_ms": 70.51130000001285,
+    "median_ms": 36.295350000000326,
+    "p95_ms": 50.00720000002184
+  },
+  "finished_at": "2026-10-15T02:34:30.102Z"
+}

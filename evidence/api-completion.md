@@ -1,5 +1,9 @@
 # Evidencia de API · T-09 a T-19
 
+Esta evidencia conserva la revisión inicial de cierre. La corrección de paginación, la cobertura
+concurrente de C-08 y las ejecuciones posteriores se registran en la
+[revisión final para integración](api-final-review.md), con sus propios commits y resultados.
+
 Revisión del 14 de octubre de 2026. Base main b2fa106; implementación comprobada c4e3d8c,
 en feature/api-completion, pendiente de PR/fusión. El plan previo es
 [api-completion-plan.md](api-completion-plan.md), commit 10c9b1b, anterior al código.

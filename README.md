@@ -49,6 +49,28 @@ No hay prórroga: suban avances parciales con commits pequeños durante la prueb
 | [`test-manager-library-3145555-infra`](https://github.com/code-sena/test-manager-library-3145555-infra) | Contenedores, red, volúmenes y motor de base de datos vacío |
 | [`test-manager-library-3145555-tool`](https://github.com/code-sena/test-manager-library-3145555-tool) | Utilidades: sembrador de datos de demostración |
 
+## Estado para revisión final
+
+La API completa está publicada en `feature/api-completion`, pendiente de integrar en `main`.
+La [revisión final](evidence/api-final-review.md) relaciona requisitos, corrección reproducida y
+resultados posteriores a la evidencia histórica. No equivale a un PR fusionado ni acredita
+automáticamente los otros repositorios. Conserva el producto y los nombres originales.
+
+Para reproducir las pruebas PHP y PostgreSQL en Docker, sin instalar PHP en el equipo:
+
+```sh
+python scripts/verify_local.py
+```
+
+En algunos equipos el ejecutable es `python3`. Requiere Docker con contenedores Linux y Python 3.
+Construye el runner de las dependencias fijadas, ejecuta núcleo e integración contra PostgreSQL 16
+en una red privada nueva y elimina solo el contenedor, volumen y red generados. No usa la base
+del despliegue ni publica puertos. Las credenciales aleatorias permanecen en memoria/entorno.
+Los reportes completos quedan privados en `.local/`, excluidos de Git y del contexto Docker;
+la salida pública contiene solo conteos, identificadores de pruebas y ubicaciones de código.
+`--pagination-only` permite ejecutar las seis regresiones de paginación. Cualquier fallo produce
+salida no exitosa. El recorrido por socket HTTPS y los INSERT por psql se ejecutan además en CI.
+
 ## Primer avance: T-01
 
 Los apartados por avance conservan su alcance histórico. El estado de la API completa y su

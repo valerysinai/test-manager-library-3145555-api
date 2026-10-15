@@ -32,3 +32,10 @@ El plan anterior `10c9b1b` y su evidencia siguen vigentes para T-09 a T-19.
 No se reescribe el producto ni se cambia tecnología. La prueba de integración se ejecuta solo
 contra una base nueva, desechable y llamada library_test. El PR queda para revisión/fusión manual
 en el fork; se mantiene el corte original de entrega y sus limitaciones.
+
+## Precisión de cobertura antes de añadir otra prueba
+
+La inspección de ConcurrencyTest muestra los tres escenarios C-01 a C-03, pero C-08 exige además
+dos altas simultáneas del mismo documento. La prueba HTTP actual solo comprueba el duplicado
+secuencial. Se reutilizará la barrera de dos procesos/bibliotecarios existentes para verificar
+201/409 DOCUMENT_TAKEN y un único socio persistido, sin cambiar el contrato ni anticipar un defecto.
